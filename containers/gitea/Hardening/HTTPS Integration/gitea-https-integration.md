@@ -36,7 +36,17 @@ This creates *cert.pem* and *key.pem* to be used for securing Gitea.
 
 
 ## Step 2: Update the app.ini file
-Once you have these files created. You will need to update the Gitea configuration file to utilize their integrated HTTPS support.
+Once you have these files created. You will need to update the Gitea configuration file (located at */data/gitea/conf/app.ini* ) to utilize their integrated HTTPS support.
+
+*Note: You'll need to install an editor on the gitea container.*
+
+The gitea Docker image is based off of alpine linux. The package manager for this is "apk" (alpine package keeper). And so, to install vim, you would need to run (within the container):
+
+```
+    apk update
+    apk add vim
+```
+
 
 Below is the working .ini file.
 ![](Images/App-ini-configuration.png)

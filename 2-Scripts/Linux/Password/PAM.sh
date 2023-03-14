@@ -31,6 +31,15 @@ fi
 #     sed -i "s/.*minclass.*/minclass = 4/g" /etc/security/pwquality.conf
 # fi
 
+# User SHA512 Hash insted of defualt MD5
+# Need to reset all prexisting passwords (RUN PASSWD CHANGE AFTER THIS 
+if [ "$(grep 'password [success=1 default=ignore] pam_unix.so obscure sha512 rounds=10000 minlen=8' /etc/pam.d/common-password | wc -l)" -eq 0 ]; then
+    echo "password [success=1 default=ignore] pam_unix.so obscure sha512 rounds=10000 minlen=8" >> /etc/pam.d/common-password
+else
+    sed  -i "s/.*password\s*[success=1 default=ignore]\s*pam_unix.so.*/password [success=1 default=ignore] pam_unix.so obscure sha512 rounds=10000 minlen=8/g" /etc/pam.d/common-password
+fi
+
+
 # Limits the user to 3 tries 
 if [ "$(grep 'password requisite pam_pwquality.so' /etc/pam.d/common-password | wc -l)" -eq 0 ]; then
     echo "password requisite pam_pwquality.so retry 3" >> /etc/pam.d/common-password
@@ -52,6 +61,7 @@ else
     sed  -i "s/.*account\s*requisite\s*pam_deny.so.*/account     requisite    pam_deny.so/g" /etc/pam.d/common-account
 fi
 
+
 # Lock user accounts after certain number of failed ssh login attempts
 # https://www.tecmint.com/use-pam_tally2-to-lock-and-unlock-ssh-failed-login-attempts/
 if [ "$(grep 'account\s*required\s*pam_faillock' /etc/pam.d/common-account | wc -l)" -eq 0 ]; then
@@ -67,13 +77,6 @@ else
     sed  -i "s/.*password\s*required\s*pam_pwhistory.so.*/password required pam_pwhistory.so remember=5/g" /etc/pam.d/common-password
 fi
 
-# User SHA512 Hash insted of defualt MD5
-# Need to reset all prexisting passwords (RUN PASSWD CHANGE AFTER THIS 
-if [ "$(grep 'password [success=1 default=ignore] pam_unix.so sha512' /etc/pam.d/common-password | wc -l)" -eq 0 ]; then
-    echo "password [success=1 default=ignore] pam_unix.so sha512" >> /etc/pam.d/common-password
-else
-    sed  -i "s/.*password\s*[success=1 default=ignore]\s*pam_unix.so.*/password [success=1 default=ignore] pam_unix.so sha512/g" /etc/pam.d/common-password
-fi
 
 #Set the PASS_MIN_DAYS parameter to 1 in /etc/login.defs : PASS_MIN_DAYS 1 Modify user parameters for all users with a password set to match: # chage --mindays 1 <user>
 #Set the PASS_MAX_DAYS parameter to conform to site policy in /etc/login.defs : PASS_MAX_DAYS 365 Modify user parameters for all users with a password set to match: # chage --maxdays 365 <user>

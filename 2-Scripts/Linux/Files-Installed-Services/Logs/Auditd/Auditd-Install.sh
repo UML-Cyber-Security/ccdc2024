@@ -78,12 +78,51 @@ echo -e "-a always,exit -F arch=b32 -S execve -F euid=0 -F auid>=1000 -F auid!=-
 #echo "-w /sbin/insmod -p x -k modules | -w /sbin/rmmod -p x -k modules | -w /sbin/modprobe -p x -k modules | -a always,exit -F arch=b64 -S init_module -S delete_module -k modules" >> /etc/audit/rules.d/ccdc.rules
 echo -e "-w /sbin/insmod -p x -k modules \n-w /sbin/rmmod -p x -k modules \n-w /sbin/modprobe -p x -k modules \n-a always,exit -F arch=b64 -S init_module -S delete_module -k modules" >> /etc/audit/rules.d/ccdc.rules
 
+# Cron Audit
+echo -e "-w /var/spool/atspool -k cron\n-w /etc/at.allow -k cron\n-w /etc/at.deny -k cron\n-w /etc/cron.allow -p wa -k cron\n-w /etc/cron.deny -p wa -k cron\n-w /etc/cron.d/ -p wa -k cron\n-w /etc/cron.daily/ -p wa -k cron\n-w /etc/cron.hourly/ -p wa -k cron\n-w /etc/cron.monthly/ -p wa -k cron\n-w /etc/cron.weekly/ -p wa -k cron\n-w /etc/crontab -p wa\n-w /var/spool/cron/root -k cron\n" >> /etc/audit/rules.d/ccdc.rules
 
+# UserFies
+echo -e "-w /etc/group -p wa -k user_groups\n-w /etc/passwd -p wa -k user_passwd\n-w /etc/shadow -k user_shadow\n-w /etc/login.defs -p wa -k logins\n" >> /etc/audit/rules.d/ccdc.rules
 
+# Sudoers file changes
+echo -e "-w /etc/sudoers -p wa -k scope\n" >> /etc/audit/rules.d/ccdc.rules
+
+# Passwd - Ident 
+echo -e "-w /usr/bin/passwd -p x -k passwd_modification\n-w /usr/sbin/groupadd -p x -k group_modification\n-w /usr/sbin/groupmod -p x -k group_modification\n-w /usr/sbin/addgroup -p x -k group_modification\n-w /usr/sbin/useradd -p x -k user_modification\n-w /usr/sbin/userdel -p x -k user_modification\n-w /usr/sbin/usermod -p x -k user_modification\n-w /usr/sbin/adduser -p x -k user_modification\n" >> /etc/audit/rules.d/ccdc.rules
+
+# Login configuration and information
+echo -e "-w /etc/securetty -p wa -k logins\n" >> /etc/audit/rules.d/ccdc.rules
+
+# root ssh key tampering
+echo -e "-w /root/.ssh -p wa -k rootkey\n" >> /etc/audit/rules.d/ccdc.rules 
+
+# Systemd
+echo -e "-w /bin/systemctl -p x -k systemd\n-w /etc/systemd/ -p wa -k systemd\n-w /usr/lib/systemd -p wa -k systemd\n"  >> /etc/audit/rules.d/ccdc.rules
+
+## SSH configuration
+echo -e "-w /etc/ssh/sshd_config -k sshd\n-w /etc/ssh/sshd_config.d -k sshd\n" >> /etc/audit/rules.d/ccdc.rules 
+
+# Systemd
+echo -e "-w /bin/systemctl -p x -k systemd\n-w /etc/systemd/ -p wa -k systemd\n-w /usr/lib/systemd -p wa -k systemd\n" >> /etc/audit/rules.d/ccdc.rules 
+
+## Pam configuration
+echo -e "-w /etc/pam.d/ -p wa -k pam\n-w /etc/security/limits.conf -p wa  -k pam\n-w /etc/security/limits.d -p wa  -k pam\n-w /etc/security/pam_env.conf -p wa -k pam\n-w /etc/security/namespace.conf -p wa -k pam\n-w /etc/security/namespace.d -p wa -k pam\n-w /etc/security/namespace.init -p wa -k pam\n" >> /etc/audit/rules.d/ccdc.rules 
+
+## Process ID change (switching accounts) applications
+echo -e "-w /bin/su -p x -k priv_esc\n-w /usr/bin/sudo -p x -k priv_esc\n" >> /etc/audit/rules.d/ccdc.rules
+
+## Suspicious activity
+echo -e "-w /usr/bin/wget -p x -k susp_activity\n-w /usr/bin/curl -p x -k susp_activity\n-w /usr/bin/base64 -p x -k susp_activity\n-w /bin/nc -p x -k susp_activity\n-w /bin/netcat -p x -k susp_activity\n-w /usr/bin/ncat -p x -k susp_activity\n-w /usr/bin/ss -p x -k susp_activity\n-w /usr/bin/netstat -p x -k susp_activity\n-w /usr/bin/ssh -p x -k susp_activity\n-w /usr/bin/scp -p x -k susp_activity\n-w /usr/bin/sftp -p x -k susp_activity\n-w /usr/bin/ftp -p x -k susp_activity\n-w /usr/bin/socat -p x -k susp_activity\n-w /usr/bin/wireshark -p x -k susp_activity\n-w /usr/bin/tshark -p x -k susp_activity\n-w /usr/bin/rawshark -p x -k susp_activity\n-w /usr/bin/rdesktop -p x -k T1219_Remote_Access_Tools\n-w /usr/local/bin/rdesktop -p x -k T1219_Remote_Access_Tools\n-w /usr/bin/wlfreerdp -p x -k susp_activity\n-w /usr/bin/xfreerdp -p x -k T1219_Remote_Access_Tools\n-w /usr/local/bin/xfreerdp -p x -k T1219_Remote_Access_Tools\n-w /usr/bin/nmap -p x -k susp_activity\n" >> /etc/audit/rules.d/ccdc.rules
+
+## Sbin suspicious activity
+echo -e "-w /sbin/iptables -p x -k sbin_susp\n-w /sbin/ip6tables -p x -k sbin_susp\n-w /sbin/ifconfig -p x -k sbin_susp\n-w /usr/sbin/arptables -p x -k sbin_susp\n-w /usr/sbin/ebtables -p x -k sbin_susp\n-w /sbin/xtables-nft-multi -p x -k sbin_susp\n-w /usr/sbin/nft -p x -k sbin_susp\n-w /usr/sbin/tcpdump -p x -k sbin_susp\n-w /usr/sbin/traceroute -p x -k sbin_susp\n-w /usr/sbin/ufw -p x -k sbin_susp\n" >> /etc/audit/rules.d/ccdc.rules
+
+## Suspicious shells ash
+echo -e "-w /bin/ash -p x -k susp_shell\n-w /bin/csh -p x -k susp_shell\n-w /bin/fish -p x -k susp_shell\n-w /bin/tcsh -p x -k susp_shell\n-w /bin/tclsh -p x -k susp_shell\n-w /bin/xonsh -p x -k susp_shell\n-w /usr/local/bin/xonsh -p x -k susp_shell\n-w /bin/open -p x -k susp_shell\n-w /bin/rbash -p x -k susp_shell\n" >> /etc/audit/rules.d/ccdc.rules
 # Make audit logs immutable. (2624) -- ensure that this works 
-echo "-e 2" >> /etc/audit/rules.d/99-finalize.rules 
+#echo "-e 2" >> /etc/audit/rules.d/99-finalize.rules 
 
-if [ -f redhat-release ]; then 
+if [ -f "/etc/redhat-release" ]; then 
     service auditd restart
 else
     systemctl restart auditd

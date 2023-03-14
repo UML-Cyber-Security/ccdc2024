@@ -96,7 +96,7 @@ chmod 644 /backups/configs/crontabs
 # Copy User Configurations 
 if [ -f /etc/redhat-release ]; then
   cp -r /var/spool/cron/ /backups/configs/crontabs
-else if [ -f /etc/debian_version ]; then 
+elif [ -f /etc/debian_version ]; then 
   cp -r /var/spool/cron/crontabs /backups/configs/crontabs
 else
   cp -r /var/cron/tabs /backups/configs/crontabs

@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#********************************
+# Started by a sad Matthew Harper...
+#********************************
+
 # Untested -- argument 1 is the user we are goint to run the docker daemon from.
 
 # Check if the scrip is ran as root.

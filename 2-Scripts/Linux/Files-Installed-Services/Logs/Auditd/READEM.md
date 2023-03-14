@@ -6,6 +6,8 @@ https://www.digitalocean.com/community/tutorials/how-to-write-custom-system-audi
 
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-defining_audit_rules_and_controls
 
+More rules:
+https://github.com/Neo23x0/auditd/blob/master/audit.rules 
 
 When using RHEL based may need to use service to restart things.
 

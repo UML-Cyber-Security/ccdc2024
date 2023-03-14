@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#********************************
+# Copied from somewhere 
+#********************************
+
 if [ $EUID -ne 0 ]; then
     echo "Run me as a superuser"
     exit 1

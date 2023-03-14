@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 if [ $EUID -ne 0 ]; then
     echo "Run me as a superuser"
     exit 1

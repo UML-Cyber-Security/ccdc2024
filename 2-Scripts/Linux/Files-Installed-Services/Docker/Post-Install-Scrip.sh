@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 #+++++++++++++++
 # This scrip takes one argument
 # It creates the docker group if

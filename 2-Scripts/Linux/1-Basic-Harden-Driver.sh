@@ -21,7 +21,7 @@ fi
 
 
 # get os from /etc/os-release to touch the /etc/release file (Make it lowercase
-OS_TYPE=grep 'ID_LIKE=.*' /etc/os-release | awk -F '=' -e '{print $2}' | tr '[:upper:]' '[:lower:]'
+OS_TYPE=$(grep 'ID_LIKE=.*' /etc/os-release | awk -F '=' -e '{print $2}' | tr '[:upper:]' '[:lower:]')
 
 # make sure /etc/___-release file exists 
 if [ $OS_TYPE = 'debian' ]
@@ -35,6 +35,10 @@ fi
 #./Backup/Intial-Backup.sh
  find . -iname 'Intial-Backup.sh' -exec {} \;
 
+# Run basic install and remove scripts
+#./Files-Installed-Services/Install-Remove/Install-Remove-Service.sh
+find . -iname 'Install-Remove-Service.sh' -exec {} \;
+
 # Run the PAM Script
 #./Password/PAM.sh
 find . -iname 'PAM.sh' -exec {} \;
@@ -47,11 +51,6 @@ find . -iname 'cron-allow.sh' -exec {} \;
 # Run file permisson scripts
 #./Files-Installed-Services/Files-Perm-Integrity.sh
 find . -iname 'Files-Perm-Integrity.sh' -exec {} \;
-
-# Run basic install and remove scripts
-#./Files-Installed-Services/Install-Remove/Install-Remove-Service.sh
-find . -iname 'Install-Remove-Service.sh' -exec {} \;
-
 
 # Run SSH Setup Script
 #./Files-Installed-Services/SSH-Setup.sh

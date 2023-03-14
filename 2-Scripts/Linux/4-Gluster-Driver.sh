@@ -32,4 +32,4 @@ find . -iname 'Gluster-Install.sh' -exec {} \;
 # find . -iname 'XXXXXXXXXXXXXXX' -exec {} \;
 
 # Set up gluster firewall (Limits the number of bricks)
-find . -iname 'Gluster-Firewall.sh' -exec {} \;
+#find . -iname 'Gluster-Firewall.sh' -exec {} \;

@@ -56,7 +56,7 @@ ip6tables -A GLUSTER-OUT -p tcp -m multiport --dport 49152:49162 -j ACCEPT
 # ip6tables -A GLUSTER -p udp -m multiport --dport 49152:49162 -m conntrack --ctstate NEW -j ACCEPT # UDP is not mentioned, we will see if it works without
 # -------------------------------------------------------------------------------------------------------------------
 
-then echo "Appending Gluster Firewall Chains to the Firewall"
+echo "Appending Gluster Firewall Chains to the Firewall"
 iptables -A INPUT -j GLUSTER-IN
 iptables -A OUTPUT -j GLUSTER-OUT
 ip6tables -A INPUT -j GLUSTER-IN

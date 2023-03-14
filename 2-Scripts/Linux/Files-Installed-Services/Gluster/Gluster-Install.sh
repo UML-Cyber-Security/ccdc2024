@@ -32,7 +32,7 @@ do
         if [ "$PKG" = "apt-get" ];then
           export DEBIAN_FRONTEND=noninteractive
           $PKG install -y glusterfs
-        if [ "$PKG" = "yum" ]; then
+        elif [ "$PKG" = "yum" ]; then
           $PKG install -y glusterfs
         elif [ "$PKG" = "pacman" ]; then
           echo "We Have more issues"

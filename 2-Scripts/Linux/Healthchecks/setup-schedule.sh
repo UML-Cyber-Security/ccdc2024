@@ -1,5 +1,10 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...\
+# One argument to create a new cron job to run every minuet
+#********************************
+
 # Check if the scrip is ran as root.
 # $EUID is a env variable that contains the users UID
 # -ne 0 is not equal zero
@@ -13,7 +18,7 @@ fi
 # echo new cron job 
 # Run the job every 5 minuets (Any over 5)
 crontab -l > new-cron
-echo "*/5 * * * * ./coreservice.sh" >> new-cron
+echo "*/1 * * * * $1" >> new-cron
 crontab new-cron
 rm new-cron
 #install new cron file

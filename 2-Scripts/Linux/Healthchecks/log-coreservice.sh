@@ -1,9 +1,14 @@
 #! /bin/bash
-#!/bin/bash
+
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 if [ $EUID -ne 0 ]; then
     echo "Run me as a superuser"
     exit 1
 fi
+
 
 #if [ -f /var/log/health-check.log ]; then 
 #    touch /var/log/health-check.log

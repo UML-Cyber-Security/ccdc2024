@@ -12,6 +12,9 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+if [ -f "/etc/redhat-release" ]
+  then groupadd shadow
+fi
 # Ownership of the message of the day and related files
 chown root:root /etc/motd  
 chown root:root /etc/issue 

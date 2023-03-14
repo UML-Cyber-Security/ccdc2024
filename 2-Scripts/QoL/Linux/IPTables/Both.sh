@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 #+++++++++++++++++++++
 # This takes one argument 
 # The IPTables Rule (as a string)

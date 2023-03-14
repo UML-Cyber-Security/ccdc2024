@@ -1,5 +1,8 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
 
 #+++++++++++++++
 # Takes three arguments

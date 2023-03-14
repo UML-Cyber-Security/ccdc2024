@@ -1,5 +1,9 @@
 ## Enable security on glusterfs
 
+#********************************
+# Written by Someone
+#********************************
+
 # 1. Create volume
 gluster volume create securevol01 replica 3 transport tcp
     rhgs-sr01:/brick_01/data \

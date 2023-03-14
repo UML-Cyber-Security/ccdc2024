@@ -1,6 +1,10 @@
 #! /bin/bash
 # Installs Glusterfs, starts and enables the service
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 # Check if the scrip is ran as root.
 # $EUID is a env variable that contains the users UID
 # -ne 0 is not equal zero

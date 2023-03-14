@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 #+++++++++++++++++++++++++++++++++++++
 # One or Two arguments will be give
 # The first is the table (defualt filter)

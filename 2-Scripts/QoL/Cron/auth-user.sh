@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 #++++++++++++++++++++++++++++++++
 # This script adds a user to the at and cron allow lists
 # The first argument is a username.

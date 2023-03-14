@@ -1,3 +1,8 @@
+#! /bin/bash
+
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
 
 echo "Creating Gluster Firewall Rules"
 # Make Chain for Gluster-IN Rules 

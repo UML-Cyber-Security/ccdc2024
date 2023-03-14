@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#********************************
+# Written by a sad Matthew Harper...
+#********************************
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # This takes one argument 
 # A file that contains a newline seperated list of IPs

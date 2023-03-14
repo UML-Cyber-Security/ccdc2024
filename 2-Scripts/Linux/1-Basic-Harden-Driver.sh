@@ -20,10 +20,16 @@ if [ "$EUID" -ne 0 ]
 fi
 
 
-# get os from /etc/os-release to touch the /etc/release file
-####################
-####################
-####################
+# get os from /etc/os-release to touch the /etc/release file (Make it lowercase
+OS_TYPE=grep 'ID_LIKE=.*' /etc/os-release | awk -F '=' -e '{print $2}' | tr '[:upper:]' '[:lower:]'
+
+# make sure /etc/___-release file exists 
+if [ $OS_TYPE = 'debian' ]
+then
+    touch /etc/debian_version
+elif [[ $OS_TYPE = 'redhat' || $OS_TYPE = 'fedora' ]]
+    touch /etc/redhat-release
+fi
 
 # Run the backup Script
 #./Backup/Intial-Backup.sh

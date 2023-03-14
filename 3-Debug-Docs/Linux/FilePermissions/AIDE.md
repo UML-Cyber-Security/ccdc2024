@@ -1,4 +1,5 @@
 # What is it
+##### Written by a sad Matthew Harper
 The Advanced Intrusion Detection Environment (AIDE) is a open source tool we can use to detect changes made on a system, to the contents of its filesystem. 
 
 This is a resource intensive and time consuming process. So its use on resource constrained systems may not be advisable, as little can be done during this time. Especially when we create the reference database. 

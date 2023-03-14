@@ -18,7 +18,7 @@ fi
 # echo new cron job 
 # Run the job every 5 minuets (Any over 5)
 crontab -l > new-cron
-echo "*/1 * * * * /usr/local/bin/log-coreservice.sh" >> new-cron
+echo "*/1 * * * * $1" >> new-cron
 crontab new-cron
 rm new-cron
 #install new cron file

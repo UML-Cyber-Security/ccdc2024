@@ -1,4 +1,6 @@
 # What is it
+##### Written by a sad Matthew Harper
+
 This is the Pluggable Authentication Module. We can use it to configure the authentication process when logging into linux.
 # What we do
 Require a minimum length password.

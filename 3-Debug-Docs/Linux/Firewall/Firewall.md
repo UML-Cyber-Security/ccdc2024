@@ -1,4 +1,5 @@
 # IPtables
+##### Written by a sad Matthew Harper
 I (Matt) Made life painful by chosing to use IPTables... Trust me it is fun to use. When it works.
 
 This "front end" to netfilters is available and can be run on most (any really) linux distribution. 

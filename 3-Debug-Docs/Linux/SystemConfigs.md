@@ -1,4 +1,5 @@
 # sysctl
+##### Written by a sad Matthew Harper
 ## What is it
 This is the command line utility that we use to affect changes in the operations of the kernel. This is done by changing various kernel tunable. They are values (files) we write values to that change the operations of the system's kernel. 
 

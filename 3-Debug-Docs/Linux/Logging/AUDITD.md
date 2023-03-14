@@ -1,5 +1,5 @@
 # Auditd
-
+##### Written by a sad Matthew Harper
 We should not have to deal with this all that much but we can see if the rules failed to load by looking at two things.
 
 First we use the CLI to and **auditctl** to see which rules have been loaded

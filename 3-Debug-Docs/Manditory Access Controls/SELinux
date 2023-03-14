@@ -1,4 +1,6 @@
 # What is it
+##### Written by a sad Matthew Harper probably at 11:30 PM
+
  SELinux is a Mandatory Access Control. We can use it to limit what programs running on the system can do. In this case SELinux is a deny be default where we whitelist what programs can or cannot do.
 
  # Commands

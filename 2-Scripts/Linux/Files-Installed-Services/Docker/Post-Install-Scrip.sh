@@ -12,8 +12,6 @@
 # specified to the docker group
 #+++++++++++++++
 
-# Untested -- argument 1 is the user we are goint to run the docker daemon from.
-
 # Check if the scrip is ran as root.
 # $EUID is a env variable that contains the users UID
 # -ne 0 is not equal zero
@@ -28,7 +26,7 @@ if [ "$(grep -q -E "^docker:" /etc/group | wc -l)" -eq 0 ]; then
 fi
 
 # Add the user to the group
-usermod -aG docker $1
+usermod -aG docker $SUDO_USER
 
 # Reload the docker group. Applies canges
 newgrp docker

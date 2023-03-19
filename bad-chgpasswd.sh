@@ -1,4 +1,7 @@
 #! /bin/bash
+
+# This is just for fun!
+
 # Works for users without a * in the feild originally.
 
 # Generate list of users 

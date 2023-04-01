@@ -21,6 +21,7 @@ osInfo[/etc/debian_version]=apt-get
 osInfo[/etc/alpine-release]=apk
 #osInfo[/etc/SuSE-release]=zypp
 #osInfo[/etc/gentoo-release]=emerge
+echo "[+] Install Docker"
 
 PKG="apt-get"
 for f in ${!osInfo[@]}
@@ -97,5 +98,6 @@ elif [ "$PKG" = "pacman" ]; then
     # Start service 
     #systemctl --user start docker-desktop
 fi
+echo "[!!] Docker has been enabled" 
 
 # Need to run the Script to setup the Docker Firewall.

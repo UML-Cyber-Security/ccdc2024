@@ -17,6 +17,7 @@
 - [ ] Add Reference files for PAM (Eh), AuditD, DockerD, SSH, and SUDO.
 - [ ] Edit old documentation (not written well)
 - [ ] Convert Google Docs writeups to MD and PDF
-- [ ] - [ ] Linpeas documentation
+   - [ ] Linpeas documentation
 - [ ] Learn more about PAM (someone else)
 - [ ] Get assignments from everyone else
+- [ ] Learn all of networking I guess

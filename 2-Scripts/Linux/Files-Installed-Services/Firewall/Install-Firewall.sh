@@ -13,6 +13,8 @@ if [ "$EUID" -ne 0 ]
 fi
  
 # If there exists this file, it is a debian based system. Use APT
+echo "[+] Installing IPTables"
+
 if [ -f "/etc/debian_version" ]; 
     then 
         export DEBIAN_FRONTEND=noninteractive
@@ -26,6 +28,7 @@ if [ -f "/etc/debian_version" ];
     else yum install iptables-services -y
 fi
 
+echo "[!!] Disabiling Firewalld"
 if [ "$(systemctl status firewalld | grep 'active' | wc -l)" -ne 0 ]; then
     # Disable 
     systemctl disable firewalld
@@ -34,4 +37,5 @@ if [ "$(systemctl status firewalld | grep 'active' | wc -l)" -ne 0 ]; then
     # Prevent Startup 
     systemctl mask firewalld
 fi
+echo "[!!] Starting IPTables"
 systemctl start iptables && systemctl start ip6tables

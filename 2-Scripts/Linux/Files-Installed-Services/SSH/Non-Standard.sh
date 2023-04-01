@@ -9,6 +9,7 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
+echo "[!!] New Port Number is $PORTNUM"
 PORTNUM="8808"
 
 # SSHD will bind to port 8808 rather than 22.
@@ -74,4 +75,6 @@ for index in ${!INPUTSSH[@]}; do
     iptables -D FORWARD $((${INPUTSSH[index]}-$index))
 done 
 
+# Restart to apply
+echo "[!! Restarting to apply rules!"
 systemctl restart sshd

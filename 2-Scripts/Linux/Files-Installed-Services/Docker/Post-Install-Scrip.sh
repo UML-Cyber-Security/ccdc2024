@@ -21,12 +21,15 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Create Docker Group
+echo "[+] Creating docker group" 
 if [ "$(grep -q -E "^docker:" /etc/group | wc -l)" -eq 0 ]; then
     groupadd docker
 fi
 
 # Add the user to the group
+echo "[+] Adding user $SUDO_USER to the group"
 usermod -aG docker $SUDO_USER
 
 # Reload the docker group. Applies canges
-newgrp docker
+echo "[!!] Updating groups of $SUDO_USER"
+sudo -H -u $SUDO_USER bash -c 'newgrp docker'

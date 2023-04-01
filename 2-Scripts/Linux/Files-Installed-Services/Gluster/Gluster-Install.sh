@@ -23,6 +23,7 @@ osInfo[/etc/debian_version]=apt-get
 #osInfo[/etc/alpine-release]=apk # Not avalable on Alpine linux
 #osInfo[/etc/SuSE-release]=zypp
 #osInfo[/etc/gentoo-release]=emerge
+echo "[+] Installing Gluster"
 
 PKG="apt-get"
 for f in ${!osInfo[@]}
@@ -41,8 +42,11 @@ do
     fi
 done
 
+# Need to make it agnostic"
+
 apt-get install glusterfs-server -y
 
+echo "[+] Setting permissions to gluster config files"
 # Create Backups of configs
 mkdir -p /backups/configs/gluster
 # Change ownership of the directory to root (explicit, should inherit from parent?)
@@ -53,14 +57,16 @@ chmod 644 /backups/configs/gluster
 cp -r /etc/glusterfs/ /backups/configs/gluster/
 
 # Enable and Start 
+echo "[+] Strating Gluster"
 systemctl enable --now glusterd
 
 
 # Limit number of bricks 
+echo "[+] Liniting number of ports (bricks) gluster can use"
 sed -i 's/.*base-port.*/    option base-port 49152/g' /etc/glusterfs/glusterd.vol
 sed -i 's/.*max-port.*/    option max-port 49162/g' /etc/glusterfs/glusterd.vol
 
-echo "Creating Gluster Firewall Rules"
+echo "[!!] Creating Gluster Firewall Rules"
 
 # Make Chain for Gluster-IN Rules 
 iptables -N GLUSTER-IN
@@ -131,8 +137,8 @@ ip6tables -A OUTPUT -j GLUSTER-OUT
 
 
 # Create Gluster directory and Inital Brick
-echo "Creating Gluster Directory in Root Directory for Brick Dirs"
+echo "[+] Creating Gluster Directory in Root Directory for Brick Dirs"
 mkdir -p /gluster/brick1
 
-
+echo "[!!] Restarting Gluster"
 systemctl restart glusterd

@@ -1,4 +1,5 @@
 # TODO
+This is primarily an... old thing that has been phased out before it began. Mainly here for me (matt) and test commits for the CODEOWNERS now I guess.
 
 ## Matt
 - [ ] Password changing Shell Script

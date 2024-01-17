@@ -45,7 +45,7 @@
 - ~~Gitlab webservice~~
 - ~~Deploy Vault~~
 - ~~Deploy Prometheus and Grafana~~
-- Deploy Semaphore
+- ~~Deploy Semaphore~~
 
 ### Integrations
 - Cert-manager pull certs from Vault acting as CA

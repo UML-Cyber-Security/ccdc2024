@@ -1,0 +1,62 @@
+----------------
+WAZUH CHEAT SHEET
+----------------
+
+apt-get install
+or
+dnf install
+
+passwd <username>
++
+sudo su
+passwd
+
+
+-------------
+SERVICE CHECK
+-------------
+
+systemctl list-units --type=service --state=running  
+(To view all systemd services)
+
+ps -p <PID> -o pid,ppid,cmd,%cpu,%mem,etime
+(For info on the service)
+
+or systemctl status service.name
+
+
+kill -9 (PID)
+(Enter PID of ther service you want to kill)
+
+---------
+ALL RUNNING PROCESSES
+---------
+ps waux
+
+
+----
+PORTS
+----
+sudo netstat -tuln
+
+
+-------------
+LINUX STARTERS
+
+sudo systemctl daemon-reload
+sudo systemctl enable wazuh-agent
+sudo systemctl start wazuh-agent
+
+
+WINDOWS STARTERS
+
+Start-Service Wazuh
+Stop-Service Wazuh
+
+
+::::::::MANAGE AGENTS THROUGH CONSOLE::::::
+/var/ossec/bin/manage_agents
+
+
+::::::TO GET INTO MANAGER THROUGH DOCKER (docker ps):::::::
+sudo docker exec -it single-node-wazuh.manager-1 bash 

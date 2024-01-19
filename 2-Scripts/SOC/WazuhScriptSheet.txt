@@ -12,6 +12,8 @@ passwd
 sudo crontab -l
 sudo crontab -l -u <username>
 
+sudo userdel -r <username>
+
 -------------
 SERVICE CHECK
 -------------

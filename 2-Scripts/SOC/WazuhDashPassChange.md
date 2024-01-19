@@ -1,4 +1,4 @@
-# Wazuh Dashbaord Password Change 
+# Wazuh Dashboard Password Change 
 
 Process to change the default wazuh dashbaord password
 

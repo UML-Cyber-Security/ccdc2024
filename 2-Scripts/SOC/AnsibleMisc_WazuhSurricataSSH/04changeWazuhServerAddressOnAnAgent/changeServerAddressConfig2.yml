@@ -1,0 +1,28 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+# test
+#   Debian[x]
+#   RHEL [x]
+#   Windows []
+
+---
+- name: Reconfigure Agent Address and restart wazuh-agent service
+  hosts: debian
+  vars:
+    address_of_server: 192.168.3.126
+  become: true
+  tasks:
+    - name: Edit address located at <ossec_config> ... <client> .... <address>a.b.c.d</address> ..
+      ansible.builtin.lineinfile:
+        path: /var/ossec/etc/ossec.conf
+        regexp: '^(\s+)<address>.*</address>$'                # match starting tab or space
+        line: '\1<address>{{ address_of_server }}</address>'
+        backrefs: true
+        backup: true                                          # in case of error, save a backup
+
+    - name: Restart Wazuh Agent
+      ansible.builtin.systemd:
+        name: wazuh-agent
+        state: restarted

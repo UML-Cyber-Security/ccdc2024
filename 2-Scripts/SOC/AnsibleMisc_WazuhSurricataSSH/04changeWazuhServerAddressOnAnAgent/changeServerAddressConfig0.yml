@@ -1,0 +1,43 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+---
+- name: Reconfigure Agent Address
+  hosts: debian
+  vars:
+    address_of_server: 192.168.3.127
+  become: true
+  tasks:
+    # - name: Verify the presense of libxm12-python in order to use community.general.xml
+      # become: true
+      # ansible.builtin.package:
+        # name: libxml2-python
+        # state: present
+        # if not present manually install libxml2-dev libxslt1-dev python-dev or make a playbook for it
+        # or pip install lxml (apt-get install python3-pip prior if needed)
+
+    - name: Verify the presense of lxml
+      ansible.builtin.command: "pip show lxml"
+      register: pip_show_result
+      changed_when: false
+
+    - name: If lxml is not install throw fail
+      ansible.builtin.fail:
+        msg: "lxml was not found"
+
+      when: "'No such file' in pip_show_result.stderr"
+
+    - name: Edit address located at <ossec_config> ... <client> .... <address>a.b.c.d</address> ..
+      become: true
+      community.general.xml:
+        path: /var/ossec/etc/ossec.conf
+        xpath: /ossec_config/client/server/address
+        value: "{{ address_of_server }}"
+        # backup: true                                  # if error occur, revert original
+        # add_decl: false                               # prevent adding xml declaration at the top
+
+    - name: Restart Wazuh Agent
+      ansible.builtin.systemd:
+        name: wazuh-agent
+        state: restarted

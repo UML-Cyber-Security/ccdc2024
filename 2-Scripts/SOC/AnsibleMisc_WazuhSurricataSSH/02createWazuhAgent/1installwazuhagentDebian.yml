@@ -1,0 +1,35 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+# TODO(SocGroup) test of all our machines
+# rockylinux [x]
+# ubuntu []
+# windows []
+
+---
+- name: Install wazuh agent
+  hosts: ubuntumachines
+  become: true
+  tasks:
+    - name: Download Wazuh agent package usually wget
+      ansible.builtin.get_url:
+        url: https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.7.1-1_amd64.deb
+        dest: /home/ansible/wazuh-agent_4.7.1-1_amd64.deb     # NOTE(JoanMontas) we can also utilize /tmp folder just in case ansible is not present
+        mode: "0644"
+
+    - name: Install Wazuh agent
+      become: true
+      ansible.builtin.shell: |
+        export WAZUH_MANAGER="192.168.2.122"
+        export WAZUH_AGENT_NAME="{{ inventory_hostname }}"
+        dpkg -i /home/ansible/wazuh-agent_4.7.1-1_amd64.deb  # NOTE(JoanMontas) we can also utilize /tmp folder just in case ansible is not present
+
+    - name: Daemon reload
+      ansible.builtin.command: sudo systemctl daemon-reload
+
+    - name: Enable wazuh-agent
+      ansible.builtin.command: sudo systemctl enable wazuh-agent
+
+    - name: Start wazuh-agent
+      ansible.builtin.command: sudo systemctl start wazuh-agent

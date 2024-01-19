@@ -1,0 +1,25 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+# TODO(SocGroup) test of all our machines
+# rockylinux [x]
+# ubuntu []
+# windows []
+
+---
+- name: Creates a new user
+  hosts: ubuntumachinesroot
+  become: true                # must
+  tasks:
+    - name: Create a new user
+      ansible.builtin.user:                                     # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+        name: someuser                                          # NOTE(JoanMontas) change the username
+        state: present                                          # if exists, do not add
+        groups: sudo                                            # NOTE(JoanMontas) Change as necessary, sudo privileges here
+        create_home: true                                       # Create a home directory for the user
+        password: "{{ '1qazxsW@1' | password_hash('sha512') }}" # NOTE(JoanMontas) change the password
+                                                                # TODO(JoanMontas) is this sent in plaintext??!?! research it
+                                                                # The turth is in the pudding
+                                                                # [WARNING]: The input password appears not to have been hashed. The 'password' argument must be
+                                                                # encrypted for this module to work properly.

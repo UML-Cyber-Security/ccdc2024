@@ -38,7 +38,6 @@ The **/etc/shadow** file has the following format:
 
 The **first field** is the **username** of the user. This **links** the entries **in** the **shadow** **file** to the **entries** in the **passwd file**
 
-BOLDS NEEDED
 The **second field** contains three subfields separated by $s the first subfield specifies the hash that will be used. The second subfield contains the salt used when hashing the password. The third subfield contains the hashed password. A single or double exclamation point (!|!!) can be placed in the second field instead of anything to lock an account. If there is a star * this means no password has been established. An empty second field is BAD this means NO PASSWORD.
 The Hashing algorithms are:
 $1 = MD5 (bad)

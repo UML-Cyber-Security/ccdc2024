@@ -1,4 +1,24 @@
-# Intro
+# IPTables <!-- omit-from-toc -->
+
+## Table of Contents <!-- omit-from-toc -->
+- [IPTables ](#iptables-)
+  - [Table of Contents ](#table-of-contents-)
+  - [Intro](#intro)
+  - [Basics](#basics)
+  - [Tables](#tables)
+  - [Chains](#chains)
+  - [Rules](#rules)
+    - [Listing Rules](#listing-rules)
+    - [Creating Rules](#creating-rules)
+    - [Replacing Rules](#replacing-rules)
+    - [Modules](#modules)
+    - [Deleting Rules](#deleting-rules)
+    - [Persistance and IPv6](#persistance-and-ipv6)
+- [Docker](#docker)
+- [Sources](#sources)
+
+## Intro
+
 This is hopefully to be a short read/presentation less than the suggested 20 - 30 minuets Manoj suggested lol!
 
 As we are concerned with Docker and how the containers interact with the host firewall, and this will (essentially) always be a Linux based host-based firewall we will need to discuss them. One of the more common firewall "Frontends" we will run into is IPTables, this is the firewall that docker will always work with. If other frontends like NFTables or Firewalld are used workarounds will need to be used to emulate the IPTables environment so that it will still work. I do say frontend as these often interact with the Netfilter 
@@ -7,7 +27,7 @@ For example in the case of Firewalld the --iptables option must be enabled other
 
 Do note that only one firewall manager can be running at a time!
 
-# IPTables
+## Basics
 
 AS mentioned IPTables is technically a "Frontend" to Netfilter, however most people usually would not consider IPTables a frontend tool.
 
@@ -249,3 +269,11 @@ https://wiki.archlinux.org/title/Iptables#:~:text=Router-,Logging,-The
 
 Docker:
 https://docs.docker.com/network/iptables/
+
+
+K8s:
+https://ronaknathani.com/blog/2020/07/kubernetes-nodeport-and-iptables-rules/
+
+Gateway:
+http://www.yolinux.com/TUTORIALS/LinuxTutorialIptablesNetworkGateway.html
+https://howtoforge.com/nat_iptables

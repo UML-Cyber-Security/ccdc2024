@@ -1,6 +1,6 @@
 # IPtables
 ##### Written by a sad Matthew Harper
-I (Matt) Made life painful by chosing to use IPTables... Trust me it is fun to use. When it works.
+I (Matt) Made life painful by choosing to use IPTables... Trust me it is fun to use. When it works.
 
 This "front end" to netfilters is available and can be run on most (any really) linux distribution. 
 
@@ -67,4 +67,3 @@ The RAW table is the first table a packet enters. These logs will be stored in t
 * https://linux.die.net/man/8/iptables
 * https://serverfault.com/questions/385937/how-to-enable-iptables-trace-target-on-debian-squeeze-6
 * https://developers.redhat.com/blog/2020/08/18/iptables-the-two-variants-and-their-relationship-with-nftables
-* 

@@ -1,5 +1,5 @@
 # Auditd
-##### Written by a sad Matthew Harper
+###### Written by a sad Matthew Harper
 We should not have to deal with this all that much but we can see if the rules failed to load by looking at two things.
 
 First we use the CLI to and **auditctl** to see which rules have been loaded
@@ -17,7 +17,7 @@ If we write rules to a .rules file we will need to restart the service before th
 ```sh
 systemctl restart auditd
 
-# or in the case of RHEL
+## or in the case of RHEL
 
 service auditd restart 
 ```
@@ -39,7 +39,7 @@ We can apparently use the following command when auditd is installed to generate
 aureport -n
 ```
 
-# Rule format
+## Rule format
 The **-w** specify that we are watching a file or directory 
 The rest of the rule can define what is done to that file or directory. THis rule can be set to trigger on reads (r), writes (w), executes (x) and attribute (a) changes. 
 
@@ -50,8 +50,8 @@ auditctl -w <Path-To-File> -p rwxa
 
 The **-a** specifies that we are watching for [syscalls](https://man.archlinux.org/man/syscalls.2). This can be used to check if specific CLI utilities have been invoked, or if a program has done some kind of action. We can specify multiple syscalls in a single rule, and when the the logs will be generated.
 
+## From RHEL docs 
 ```
-# From RHEL docs 
 auditctl -a action,filter -S system_call -F field=value -k key_name
 ```
 
@@ -68,8 +68,9 @@ The **-S** felid specifies a syscall, this can be a number or the name associate
 The **-F** field specifies an additional option, this can be UIDs GIDs, Effective UID ect. They are represented as **unsigned integers** so the value of **-1** which represents **no assigned uid** can be displayed as **4294967295**
 
 E.X:
+
+## All uids above 1000 (likely min need to check /etc/login.defs) that are not unset.
 ```
-# All uids above 1000 (likely min need to check /etc/login.defs) that are not unset.
 auditctl <rule> -F auid>=1000 -F auid!=unset
 ```
 
@@ -79,7 +80,7 @@ We can create a rule to audit use of executables by doing the following:
 auditctl  -a action,filter [ -F arch=cpu -S system_call] -F exe=path_to_executable_file -k key_name
 ```
 
-# Ref
+## Ref
 * https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-defining_audit_rules_and_controls
 * https://wiki.archlinux.org/title/Audit_framework -- Recommended
 * https://www.digitalocean.com/community/tutorials/how-to-use-the-linux-auditing-system-on-centos-7

@@ -9,6 +9,9 @@ passwd <username>
 sudo su
 passwd
 
+sudo crontab -l
+sudo crontab -l -u <username>
+
 -------------
 SERVICE CHECK
 -------------

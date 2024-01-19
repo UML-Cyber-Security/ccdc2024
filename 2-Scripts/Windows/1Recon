@@ -1,0 +1,19 @@
+Windows Inventory
+
+#Windows Defender Firewall
+To get inbound and outbound windows defenders rules go to it
+then you can export both list
+prob email to self
+
+#Active Directory
+##Users
+Get-ADUser -Filter *
+
+#DNS
+can export list in dns manager but doesnt open files
+
+#Domain
+Display Basic Domain Information
+Get-ADDomain
+This will list all computers in the domain
+Get-AdComputer -filter *

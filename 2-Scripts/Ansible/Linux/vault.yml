@@ -1,0 +1,2 @@
+ansible_ssh_user: your_ssh_user
+ansible_ssh_pass: your_ssh_password

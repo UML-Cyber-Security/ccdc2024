@@ -1,0 +1,176 @@
+---
+- name: play 1 practice example
+  hosts: 192.168.3.201
+  tasks:
+    - name: install apache
+      yum:
+        name: apache
+        state: present
+    - name: start apache
+      service:
+        name: apache
+        state: started
+
+- name: Mac Security Checks
+  hosts: localhost
+  tasks:
+    - name: Check for security updates
+      command: "softwareupdate -l"
+
+- name: Run Wazuh registration script maybe
+  hosts: your_target_group
+  become: yes
+
+  tasks:
+    - name: Run Wazuh registration script
+      command: "/path/to/wazuh_registration_script.sh"
+
+- name: Update Systems and Install Ansible 
+  hosts: localhost
+  tasks:
+    - name: system update
+      apt:
+        name: update
+        state: latest
+      become: true
+
+    - name: Ansible update
+      apt:
+        name: ansible
+        state: latest
+      become: true
+
+- name: Install Nginx
+  hosts: web_servers
+  become: true  # Run tasks with sudo or become user
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'  # Use apt for Debian-based systems
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'Debian'  # Install Nginx on Debian-based systems
+
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+#ansible-playbook install_nginx.yml
+
+
+- name: Install Wazuh
+  hosts: your_target_hosts
+  become: yes
+
+  tasks:
+    - name: Install pre-requisites
+      apt:
+        name:
+          - curl
+          - apt-transport-https
+          - lsb-release
+          - gnupg
+
+    - name: Add Wazuh GPG key
+      apt_key:
+        url: https://packages.wazuh.com/key/GPG-KEY-WAZUH
+        state: present
+
+    - name: Add Wazuh repository
+      apt_repository:
+        repo: "deb https://packages.wazuh.com/{{ ansible_distribution|lower }}/{{ ansible_distribution_release }}/stable/ {{ ansible_distribution_release }} main"
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Wazuh
+      apt:
+        name: wazuh-manager
+        state: present
+#ansible-playbook install_wazuh.yml
+
+#ansible-vault create mysecrets.yml
+#
+
+- name: Secure Ansible Playbook #command: ansible-vault encrypt vars/vault.yml before running playbook
+  hosts: your_target_hosts
+  become: true
+
+  vars_files:
+    - vars/vault.yml
+
+  tasks:
+    - name: Ensure Ansible is up-to-date
+      apt:
+        name: ansible
+        state: latest
+      become: true
+
+    - name: Secure SSH configuration
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: "{{ item.state | default('present') }}"
+      loop:
+        - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no' }
+        - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no' }
+      notify:
+        - Restart SSH
+
+  handlers:
+    - name: Restart SSH
+      service:
+        name: ssh
+        state: restarted
+#ansible-playbook your_playbook.yml --ask-vault-pass
+
+
+- name: Migrate Vault from Public to Private
+  hosts: public_vault_server
+  become: yes
+
+  tasks:
+    - name: Backup Vault Data
+      command: vault operator export > /tmp/vault_backup.json
+
+    - name: Deploy Private Infrastructure
+      # Add tasks to set up your private infrastructure, including network configurations.
+
+    - name: Install Vault on Private Infrastructure
+      # Add tasks to install HashiCorp Vault on the private infrastructure.
+
+    - name: Configure Vault on Private Infrastructure
+      # Add tasks to configure Vault on the private infrastructure, considering network settings, storage backends, etc.
+
+    - name: Restore Vault Data
+      command: vault operator import /tmp/vault_backup.json
+
+    - name: Update DNS and Network Configurations
+      # Add tasks to update DNS records, firewall rules, and network configurations to point to the private Vault.
+
+    - name: Update Clients and Applications
+      # Add tasks to update clients, applications, or systems that interact with Vault to use the new private address.
+
+    - name: Testing
+      # Add tasks to test the functionality of Vault on the private infrastructure.
+
+    - name: Monitor and Verify
+      # Add tasks to monitor the new Vault deployment and verify that it is handling requests properly.
+
+    - name: Security Considerations
+      # Add tasks to review and enhance security measures for the private deployment.
+
+    - name: Communication
+      # Add tasks to communicate the change to relevant stakeholders.
+
+    # Add additional tasks as needed based on your specific requirements.
+
+

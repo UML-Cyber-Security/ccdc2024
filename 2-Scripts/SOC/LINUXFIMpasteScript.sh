@@ -1,8 +1,3 @@
-# Bash Script for Linux FIM setup
-
-Copy and paste into terminal as ROOT user
-
-```
 sudo bash -c 'cat <<EOF | sed "/<!-- Directories to check  (perform all possible verifications) -->/r /dev/stdin" /var/ossec/etc/ossec.conf > /var/ossec/etc/ossec.conf.new
 <ignore>/root/.bash_history</ignore>
 <directories realtime="yes">/etc/update-motd.d/</directories>
@@ -33,4 +28,4 @@ sudo bash -c 'cat <<EOF | sed "/<!-- Directories to check  (perform all possible
 EOF'
 sudo mv /var/ossec/etc/ossec.conf.new /var/ossec/etc/ossec.conf
 sudo systemctl restart wazuh-agent
-```
+

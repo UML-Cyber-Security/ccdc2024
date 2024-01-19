@@ -1,0 +1,6 @@
+Removing spammy logon loggof alerts from windows domain controller
+
+1. log onto machine (WAZUH MANAGER MACHINE)
+2. open rules file: /var/ossec/ruleset/rules/0580-win-security_rules.xml
+3. set severity level of rule ID's 60106 and 60137 to 0
+4. Restart wazuh manager

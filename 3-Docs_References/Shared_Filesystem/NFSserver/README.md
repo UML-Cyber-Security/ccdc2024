@@ -2,23 +2,12 @@
 
 **Table Of Contents**
 - [Setting UP NFS server to connect to proxmox as a shared storage directory](#setting-up-nfs-server-to-connect-to-proxmox-as-a-shared-storage-directory)
-  - [General Information](#general-information)
 - [NFS server Machine Steps](#nfs-server-machine-steps)
   - [Setting up NFS server with an NFS share (directory)](#setting-up-nfs-server-with-an-nfs-share-directory)
 - [Client Machine Steps](#client-machine-steps)
   - [Creating and Linking directories](#creating-and-linking-directories)
 - [Extra - Ensuring Proxmox recognizes the cluster storage](#extra---ensuring-proxmox-recognizes-the-cluster-storage)
 - [Questions:](#questions)
-
-
-
-
-## General Information
-|  IP | Name  |
-|---|---|
-|  192.168.0.86 | NFS server  |
-
-** Note: This is assuming that there is storage already set up on xoa(which I don't have access to) or some external vm 
 
 # NFS server Machine Steps
 

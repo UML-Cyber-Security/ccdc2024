@@ -1,9 +1,9 @@
-# What is it
-##### Written by a sad Matthew Harper probably at 11:30 PM
+# SELinux
+###### Written by a sad Matthew Harper probably at 11:30 PM
 
  SELinux is a Mandatory Access Control. We can use it to limit what programs running on the system can do. In this case SELinux is a deny be default where we whitelist what programs can or cannot do.
 
- # Commands
+ ## Commands
  
  We can look at the current status 
  ```
@@ -38,7 +38,7 @@ sudo sealert -a /var/log/audit/audit.log
 
 We can run the suggested commands to further create a profile for a service.
 
-# SELinux Terms 
+## SELinux Terms 
 
 Each file and directory gets a user, role and type context we can look at this using the following 
 
@@ -55,12 +55,12 @@ sudo getsebool -a | grep "httpd_can"
  We can change the boolean using the setsebool command  
 
 
-# Note
+## Note
 We can install and run SELinux on Ubuntu based systems. 
 We can use it on containers as well
 
 
-# REF
+## REF
 
 * https://www.linode.com/docs/guides/a-beginners-guide-to-selinux-on-centos-7/
 * https://www.redhat.com/en/topics/linux/what-is-selinux

@@ -1,4 +1,13 @@
-# Nginx
+# Nginx <!-- omit-from-toc -->
+
+## Table of Contents
+- [Nginx ](#nginx-)
+  - [Table of Contents](#table-of-contents)
+  - [Domain/Host Based Filtering with Streams](#domainhost-based-filtering-with-streams)
+  - [Path Based Filtering](#path-based-filtering)
+    - [Install](#install)
+    - [Configure](#configure)
+    - [Refs](#refs)
 
 ## Domain/Host Based Filtering with Streams
 

@@ -3,22 +3,11 @@ This is a repository detailing the setup and configuration of the HAProxy system
 
 ## Table of Contents <!-- omit from toc -->
 - [HAProxy](#haproxy)
-  - [Setup VM](#setup-vm)
   - [Setup HAProxy](#setup-haproxy)
   - [PFSense Modifcations](#pfsense-modifcations)
   - [Example Final Config](#example-final-config)
+  - [Domain Based Forwarding (Link)](#domain-based-forwarding-link)
     - [Reference](#reference)
-
-## Setup VM
-The Setup of the VM is as follows 
-1. Create a Linux Server VM. This should have 1 CP and 2 - 4 GB of RAM.
-2. Attach the VM to the DMZ Interface.
-3. Start the VM, configure as any other normal device
-4. Install HAProxy
-    ```
-    sudo apt install haproxy
-    ```
-**Note** Modifications to PFSense will be in the section [PFSense Modifcations](#pfsense-modifcations), and refer to the [Expose Services](./../../Network/PFSense/2-Expose_Services.md) Document.
 
 ## Setup HAProxy
 1. Generate a X509 Cert and key using Open SSL (We are using a self signed certificate). Store this in a well known location 
@@ -255,6 +244,12 @@ backend be_Windows
         server Windows-R <DNS>:443 ssl verify none
 
 ```
+
+
+## Domain Based Forwarding (Link)
+
+https://seanmcgary.com/posts/haproxy---route-by-domain-name/
+
 ### Reference  
 * Path Based Routing https://www.haproxy.com/blog/path-based-routing-with-haproxy
   * I used this for Path stripping, so this can be simplified using the if { path /a } || { path_beg /a/ } over the ACLs

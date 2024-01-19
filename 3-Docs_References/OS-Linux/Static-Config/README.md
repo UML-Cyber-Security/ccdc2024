@@ -1,5 +1,12 @@
-# Static Configurations 
-
+# Static Configurations <!-- omit-from-toc -->
+This covers static IP configurations for Linux Devices.
+## Table of Contents <!-- omit-from-toc -->
+- [Static Configurations ](#static-configurations-)
+  - [Table of Contents ](#table-of-contents-)
+  - [IP Addresses](#ip-addresses)
+    - [Redhat](#redhat)
+    - [Debian Based](#debian-based)
+  - [INterface Manipulation](#interface-manipulation)
 
 ## IP Addresses 
 This is a section that pertains to the setting, and modification of **static** (manually) configured IP addresses.

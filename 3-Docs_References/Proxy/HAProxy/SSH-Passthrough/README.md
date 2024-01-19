@@ -1,5 +1,37 @@
-# Task 2 Walkthrough
-Initial Work taken from the CCDC Airforce Challege
+# SSH Passthrough <!-- omit-from-toc -->
+
+## Table of Contents <!-- omit-from-toc -->
+- [SSH Passthrough ](#ssh-passthrough-)
+  - [Table of Contents ](#table-of-contents-)
+  - ["Physical" Infrastructure Layout](#physical-infrastructure-layout)
+  - [Containers Used](#containers-used)
+    - [Enabling SSH on Containers](#enabling-ssh-on-containers)
+    - [Dockerfile](#dockerfile)
+    - [Uploading to Docker hub](#uploading-to-docker-hub)
+  - [Docker Networks](#docker-networks)
+    - [Proxy-Web](#proxy-web)
+    - [Web-DB](#web-db)
+  - [Docker Stack -- file](#docker-stack----file)
+    - [Services](#services)
+    - [Volumes](#volumes)
+    - [Networks](#networks)
+    - [Stack Commands (Launch, Take Down, and status)](#stack-commands-launch-take-down-and-status)
+  - [Certificate Authority](#certificate-authority)
+    - [EasyRSA -- Initial Temp CA](#easyrsa----initial-temp-ca)
+    - [Images](#images)
+  - [HAproxy](#haproxy)
+    - [Global](#global)
+    - [Defaults](#defaults)
+    - [HTTP Configuration](#http-configuration)
+    - [HTTPS Configuration](#https-configuration)
+    - [SSH Configuration](#ssh-configuration)
+      - [Resolver](#resolver)
+      - [Frontend](#frontend)
+      - [Backend](#backend)
+      - [Use](#use)
+  - [ISSUES](#issues)
+  - [Sources](#sources)
+
 
 ## "Physical" Infrastructure Layout
 A set of **N** Physical machines where **N** is greater than or equal to one. There will be at least **M** managers where **M** is greater than 1, but less than **N**, There are conventions where between 3-7(5) is the max you would want. **SOURCE** 

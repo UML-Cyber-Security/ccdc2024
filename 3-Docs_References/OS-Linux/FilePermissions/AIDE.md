@@ -1,12 +1,22 @@
-# What is it
-##### Written by a sad Matthew Harper
+# AIDE <!-- omit-from-toc -->
+###### Written by a sad Matthew Harper <!-- omit-from-toc -->
+
+## Table of Contents <!-- omit-from-toc -->
+- [AIDE ](#aide-)
+          - [Written by a sad Matthew Harper](#written-by-a-sad-matthew-harper)
+  - [Table of Contents](#table-of-contents)
+  - [How we set it up](#how-we-set-it-up)
+  - [Rules](#rules)
+  - [Concerns](#concerns)
+  - [References](#references)
+
 The Advanced Intrusion Detection Environment (AIDE) is a open source tool that we can use to detect changes made to files on a system. 
 
 This is a resource intensive and time consuming process. So the consumption on resource constrained systems means it may not be advisable in all situations, as little can be done during the run time. Especially when we are creating the reference database. 
-# How we set it up
+## How we set it up
 First we install AIDE with our system's package manager
 ```sh
-# RHEL based
+## RHEL based
 yum install -y aide
 ``` 
 
@@ -29,7 +39,7 @@ selinux - security context
 
 User the **aide-init** command to generate a database. The resulting output will be stored in **/var/lib/aide**
 ```sh
-# Initialize database
+## Initialize database
 aideinit
 ```
 
@@ -48,12 +58,12 @@ We may want to update the database that we have created. If this is the case we 
 aide --update
 ```
 
-# Rules
+## Rules
 ```sh
-# Creates FIPSR rule
+## Creates FIPSR rule
 FIPSR= p+i+n+u+g+s+m+c+acl+selinux+xattrs+sha256
 
-# Applies rule to file/dir
+## Applies rule to file/dir
 /etc/hosts       FIPSR
 ```
 
@@ -63,7 +73,7 @@ Example Config given in the [AIDE Docs](https://aide.github.io/doc/)
 ```sh
 #AIDE conf
 
-   # Here are all the things we can check - these are the default rules
+   ## Here are all the things we can check - these are the default rules
    #
    #p:      permissions
    #ftype:  file type
@@ -101,25 +111,25 @@ Example Config given in the [AIDE Docs](https://aide.github.io/doc/)
    #xattrs:  extended file attributes
    #e2fsattrs: file attributes on a second extended file system
 
-   # You can also create custom rules - my home made rule definition goes like this
+   ## You can also create custom rules - my home made rule definition goes like this
    #
    MyRule = p+i+n+u+g+s+b+m+c+md5+sha1
 
-   # Next decide what directories/files you want in the database
+   ## Next decide what directories/files you want in the database
 
    /etc p+i+u+g     #check only permissions, inode, user and group for etc
-   /bin MyRule      # apply the custom rule to the files in bin
-   /sbin MyRule     # apply the same custom rule to the files in sbin
+   /bin MyRule      ## apply the custom rule to the files in bin
+   /sbin MyRule     ## apply the same custom rule to the files in sbin
    /var MyRule
-   !/var/log/.*     # ignore the log dir it changes too often
-   !/var/spool/.*   # ignore spool dirs as they change too often
-   !/var/adm/utmp$  # ignore the file /var/adm/utmp
+   !/var/log/.*     ## ignore the log dir it changes too often
+   !/var/spool/.*   ## ignore spool dirs as they change too often
+   !/var/adm/utmp$  ## ignore the file /var/adm/utmp
 ```
 
-# Concerns 
+## Concerns 
 There is the runtime aspect of this program. It would not be wise to change the filesystem while the database is being created. Additionally due to the resource intensive nature of the operations (reading the entire filesystem and creating an indexed database) we cannot do much of anything during this process.  
 
-# References  
+## References  
 * https://www.redhat.com/sysadmin/linux-security-aide
 * https://aide.github.io/doc/
 

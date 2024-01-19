@@ -1,16 +1,10 @@
-# What is it 
-
-
-
-
-
+# Apparmor
 
 # Note
 We **cannot** run apparmor in RHEL based systems as it is unsupported. 
-We can use it on containers as well
+We can use it on containers.
 
-# Ref: 
-
+# Refs
 https://gitlab.com/apparmor/apparmor/-/wikis/home
 https://gitlab.com/apparmor/apparmor/-/tre je/master/profiles
 https://wiki.ubuntu.com/AppArmor

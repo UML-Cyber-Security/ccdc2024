@@ -28,6 +28,7 @@ kill -9 (PID)
 ALL RUNNING PROCESSES
 ---------
 ps waux
+ps waux | grep <keyword>
 
 ----
 PORTS

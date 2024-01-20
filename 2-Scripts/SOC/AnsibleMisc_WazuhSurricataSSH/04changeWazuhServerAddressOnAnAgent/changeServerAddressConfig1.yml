@@ -1,0 +1,31 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+---
+- name: Reconfigure Agent Address
+  hosts: debian
+  vars:
+    address_of_server: 192.168.3.127
+  become: true
+  tasks:
+    # - name: Edit address located at <ossec_config> ... <client> .... <address>a.b.c.d</address> ..
+      # ansible.builtin.lineinfile:
+        # path: /var/ossec/etc/ossec.conf
+        # regexp: '^  <address>.*</address>'          # Match the entire address line
+        # line: '  <address>192.168.3.127</address>'  # Replace with new value
+        # backrefs: true                              # back up in case of error
+
+    - name: Modify address line using lineinfile
+      lineinfile:
+        path: /var/ossec/etc/ossec.conf
+        regexp: '^  <address>.*</address>$'  # Match the entire address line
+        line: '  <address>a.b.c.d</address>'  # Replace with new value
+        backrefs: yes  # Preserve leading spaces
+
+
+
+    # - name: Restart Wazuh Agent
+      # ansible.builtin.systemd:
+        # name: wazuh-agent
+        # state: restarted

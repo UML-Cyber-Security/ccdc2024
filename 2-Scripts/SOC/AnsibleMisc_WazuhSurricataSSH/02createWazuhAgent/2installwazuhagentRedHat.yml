@@ -1,0 +1,33 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+# TODO(SocGroup) test of all our machines
+# rockylinux [x]
+# ubuntu []
+# windows []
+
+---
+- name: Install Wazuh Agent
+  hosts: redhatmachine
+  become: true
+
+  tasks:
+    - name: Download Wazuh Agent RPM
+      shell: "curl -o /tmp/wazuh-agent-4.7.1-1.x86_64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.7.1-1.x86_64.rpm"
+      args:
+        executable: /bin/bash
+
+    - name: Install Wazuh Agent
+      shell: "sudo WAZUH_MANAGER='192.168.3.126' WAZUH_AGENT_NAME='{{ inventory_hostname }}' rpm -ihv /tmp/wazuh-agent-4.7.1-1.x86_64.rpm"
+      args:
+        executable: /bin/bash
+
+    - name: Daemon reload
+      ansible.builtin.command: sudo systemctl daemon-reload
+
+    - name: Enable wazuh-agent
+      ansible.builtin.command: sudo systemctl enable wazuh-agent
+
+    - name: Start wazuh-agent
+      ansible.builtin.command: sudo systemctl start wazuh-agent

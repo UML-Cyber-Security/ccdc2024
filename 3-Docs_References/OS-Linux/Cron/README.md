@@ -36,4 +36,3 @@ Special Strings
 **Cron:**
 * https://www.hostinger.com/tutorials/cron-job
 * https://www.ibm.com/docs/en/db2oc?topic=task-unix-cron-format
-* 

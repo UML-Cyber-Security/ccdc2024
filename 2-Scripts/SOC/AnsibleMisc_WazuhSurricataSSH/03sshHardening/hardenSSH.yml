@@ -1,0 +1,36 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+# TODO(SocGroup) I have only tested it in my local machine - JoanMontas
+# rocky linux []
+# ubuntu []
+# windows []
+
+---
+- name: Configure SSH on Hosts
+  hosts: machines
+  become: true
+  tasks:
+    - name: Copy Public Key to Authorized Keys
+      ansible.posix.authorized_key:
+        user: "{{ ansible_user }}"
+        key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+        state: present
+
+    - name: Disable SSH Password Authentication
+      ansible.builtin.lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+        backup: true
+
+    - name: Disable SSH Root Login
+      ansible.builtin.lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+        line: 'PermitRootLogin no'
+        backup: true
+
+    - name: Restart SSH Service
+      ansible.builtin.command: service ssh restart # NOTE(SocGroup) use systemctl or machine specific

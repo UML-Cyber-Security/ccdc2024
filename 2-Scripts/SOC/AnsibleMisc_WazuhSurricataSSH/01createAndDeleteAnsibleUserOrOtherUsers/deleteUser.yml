@@ -1,0 +1,19 @@
+# Copyright Joan Montas
+# All rights reserved.
+# License under GNU General Public License v3.0
+
+# TODO(SocGroup) test of all our machines
+# rockylinux [x]
+# ubuntu []
+# windows []
+
+---
+- name: Delete user
+  hosts: ubuntumachinesroot
+  become: true                  # must
+  tasks:
+    - name: Remove   a user
+      ansible.builtin.user:     # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+        name: someuser          # NOTE(JoanMontas) change the username
+        state: absent           # if exists, remove it
+        remove: true            # Create a home directory for the user

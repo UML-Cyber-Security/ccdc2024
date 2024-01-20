@@ -1,0 +1,1 @@
+Get-SmbSession | Close-SmbSession

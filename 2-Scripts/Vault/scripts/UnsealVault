@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Enter unseal key 1: "
+read key1
+echo "Enter unseal key 2: "
+read key2
+vault operator unseal $key1
+vault operator unseal $key2

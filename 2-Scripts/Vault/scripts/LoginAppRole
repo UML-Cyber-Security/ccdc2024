@@ -1,0 +1,8 @@
+#Login with AppRole and Get Token:
+
+#!/bin/bash
+echo "Enter Role ID: "
+read role_id
+echo "Enter Secret ID: "
+read secret_id
+vault write auth/approle/login role_id=$role_id secret_id=$secret_id

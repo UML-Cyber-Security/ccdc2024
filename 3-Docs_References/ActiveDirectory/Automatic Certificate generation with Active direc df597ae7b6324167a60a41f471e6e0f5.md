@@ -4,7 +4,7 @@ Currently on the Domain Controller
 
 Access Group Policy management console on Domain Controller
 
-Naviagate to Forest: “Domain name” >Domains>”Domain name” >
+Navigate to Forest: “Domain name” >Domains>”Domain name” >
 
 Right click Domain name > 
 
@@ -12,7 +12,7 @@ create a GPO in this domain
 
 ![Untitled](Automatic%20Certificate%20generation%20with%20Active%20direc%20df597ae7b6324167a60a41f471e6e0f5/Untitled.png)
 
-Give it a meaning full name
+Give it a name
 
 A GPO contract icon should appear in the left hand side.
 
